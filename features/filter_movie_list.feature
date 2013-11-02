@@ -26,7 +26,7 @@ Scenario: restrict to movies with 'PG' or 'R' ratings
   When I check the following ratings: PG, R
   When I uncheck the following ratings: G, PG-13, NC-17
   And I press "ratings_submit"
-  Then I should be on the homepage
+  Then I should be on the RottenPotatoes homepage
   And I should see "The Terminator" 
   And I should see "When Harry Met Sally"
   And I should see "Amelie"
@@ -39,7 +39,15 @@ Scenario: restrict to movies with 'PG' or 'R' ratings
   And I should not see "Chicken Run"
 
 Scenario: no ratings selected
-  # see assignment
+  Given I am on the RottenPotatoes homepage
+  When I uncheck the following ratings: G, PG, PG-13, R, NC-17
+  And I press "ratings_submit"
+  Then I should be on the RottenPotatoes homepage
+  And I should see all of the movies
 
 Scenario: all ratings selected
-  # see assignment
+  Given I am on the RottenPotatoes homepage
+  When I check the following ratings: G, PG, PG-13, R, NC-17
+  And I press "ratings_submit"
+  Then I should be on the RottenPotatoes homepage
+  And I should see all of the movies
